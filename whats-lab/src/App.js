@@ -108,8 +108,7 @@ class App extends React.Component {
     if (event.key === 'Enter'){
       this.adicionaMensagem()
     }
-  }
-
+  // buuuu
   
   onChangeNomeUsuario = (event) => {
     this.setState({ valorNomeUsuario: event.target.value });
