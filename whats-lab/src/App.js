@@ -10,7 +10,13 @@ const TelaToda = styled.div`
   height: 100vh;
   
 `
-
+const MensagemTela = styled.div`
+  background-color:white;
+  margin-right: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`
 const Formulario = styled.div`
   display: flex;
   width: 100%;
@@ -26,37 +32,38 @@ const ListaDeMensagens = styled.div`
   display:flex;
   justify-content: flex-end;
   flex-direction: column;
-  border: solid 2px black;
+  border: solid 1px black;
   
 `
 const InputPersonalizado = styled.input`
-    background-color: #F1F1F3;
-    -webkit-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
-    box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
-    border: none;
-    width: ${props => props.width};
-    height: 35px;
-    outline: none;
-    margin: 30px 2px 10px 3px;
+  background-color: #F1F1F3;
+  -webkit-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  border: none;
+  width: ${props => props.width};
+  height: 35px;
+  outline: none;
+  margin: 30px 2px 10px 3px;
     
 `
 const ButtonPersonalizado = styled.button`
   background-color: #DB7093;
-    margin: 30px 3px 10px 2px;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 10px;
-    color: white;
-    font-size: 12px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: bold;
-    -webkit-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
-    box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  margin: 30px 3px 10px 2px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  -webkit-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
+  outline: none;
 `
 
   
@@ -86,7 +93,18 @@ class App extends React.Component {
       this.adicionaMensagem()
     }
   }
-  
+  // reconheceEu = (valorNomeUsuario) => {
+    
+  //   if(valorNomeUsuario === "Eu") {
+  //   const listaDeMensagens = this.state.mensagem.map((mensagem) => {
+  //     return (
+  //       <MensagemTela>
+  //         <NomeEu>{mensagem.nomeUsuario}</NomeEu>:<br></br>
+  //         {mensagem.mensagemUsuario}
+  //       </MensagemTela>
+  //   }
+  // }
+
   onChangeNomeUsuario = (event) => {
     this.setState({ valorNomeUsuario: event.target.value });
   };
@@ -98,9 +116,10 @@ class App extends React.Component {
   render () {
     const listaDeMensagens = this.state.mensagem.map((mensagem) => {
       return (
-        <p>
-          {mensagem.nomeUsuario}: {mensagem.mensagemUsuario}
-        </p>
+        <MensagemTela>
+          <b>{mensagem.nomeUsuario}</b>:<br></br>
+          {mensagem.mensagemUsuario}
+        </MensagemTela>
       );
     });
 
