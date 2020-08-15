@@ -45,6 +45,7 @@ const InputPersonalizado = styled.input`
   height: 35px;
   outline: none;
   margin: 30px 2px 10px 3px;
+  border-radius: 10px;
     
 `
 const ButtonPersonalizado = styled.button`
@@ -107,7 +108,7 @@ class App extends React.Component {
   apertouEnter = (event) => {
     if (event.key === 'Enter'){
       this.adicionaMensagem()
-    }
+  } }
   // buuuu
   
   onChangeNomeUsuario = (event) => {
