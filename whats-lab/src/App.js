@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import styled from "styled-components"
+import Mensagem from './components/Mensagem/Mensagem';
 
 const TelaToda = styled.div`
   display: flex;
@@ -8,21 +9,11 @@ const TelaToda = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  
-`
-const MensagemTela = styled.div`
-  background-color:white;
-  margin-right: 150px;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+
 `
 const Formulario = styled.div`
   display: flex;
   width: 100%;
-`
-const ConteudoMensagem = styled.div`
-  margin: 5px 3px 5px 5px;
 `
 
 const ListaDeMensagens = styled.div`
@@ -32,8 +23,8 @@ const ListaDeMensagens = styled.div`
   display:flex;
   justify-content: flex-end;
   flex-direction: column;
-  border: solid 1px black;
-  
+  border: solid 1px black;    
+
 `
 const InputPersonalizado = styled.input`
   background-color: #F1F1F3;
@@ -50,7 +41,7 @@ const InputPersonalizado = styled.input`
 `
 const ButtonPersonalizado = styled.button`
   background-color: #DB7093;
-  margin: 30px 3px 10px 2px;
+  margin: 30px 4px 10px 3px;
   text-decoration: none;
   border: none;
   border-radius: 10px;
@@ -66,9 +57,6 @@ const ButtonPersonalizado = styled.button`
   box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
   outline: none;
 `
-const MensagemTelaEu = styled.div`
-  background-color: #90EE90;
-`
   
 class App extends React.Component {
   state = {
@@ -76,26 +64,13 @@ class App extends React.Component {
     valorNomeUsuario:"",
     valorMensagem:""
   }
-  reconheceEu = (valorNomeUsuario) => {
-    
-    if(valorNomeUsuario.toLowerCase === "Eu") {
-      let listaDeMensagensEu = this.state.mensagem.map((mensagem) => {
-        return (
-          <MensagemTelaEu>
-            <b>{mensagem.nomeUsuario}</b>:<br></br>
-            {mensagem.mensagemUsuario}
-          </MensagemTelaEu>
-        )
-      })
-    }
-  }
-
+  
   adicionaMensagem = () =>{
     const novaMensagem = {
       nomeUsuario: this.state.valorNomeUsuario,
       mensagemUsuario: this.state.valorMensagem
     } 
-    this.reconheceEu(this.state.valorNomeUsuario)
+    // this.reconheceEu(this.state.valorNomeUsuario)
     const novasMensagens = [...this.state.mensagem, novaMensagem];
    
     this.setState({
@@ -103,14 +78,14 @@ class App extends React.Component {
       valorNomeUsuario: "",
       valorMensagem: ""    
     });
+    console.log(novasMensagens)
   };
-  
+
   apertouEnter = (event) => {
     if (event.key === 'Enter'){
       this.adicionaMensagem()
   } }
-  // buuuu
-  
+    
   onChangeNomeUsuario = (event) => {
     this.setState({ valorNomeUsuario: event.target.value });
   };
@@ -120,20 +95,20 @@ class App extends React.Component {
   };
 
   render () {
-    let listaDeMensagens = this.state.mensagem.map((mensagem) => {
+    const listaDeMensagens = this.state.mensagem.map((mensagem) => {
       return (
-        <MensagemTela>
-          <b>{mensagem.nomeUsuario}</b>:<br></br>
-          {mensagem.mensagemUsuario}
-        </MensagemTela>
+        <Mensagem
+         valorNomeUsuario={mensagem.nomeUsuario}
+         valorMensagem={mensagem.mensagemUsuario}
+        >
+        </Mensagem>
       );
     }); // código que já estava funcionando
     
-
     return (
       <TelaToda>        
         <ListaDeMensagens>
-          <ConteudoMensagem>{listaDeMensagens}</ConteudoMensagem>
+          {listaDeMensagens}
           <Formulario>
             <InputPersonalizado width={"25%"}
               value={this.state.valorNomeUsuario}
