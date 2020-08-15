@@ -45,6 +45,7 @@ const InputPersonalizado = styled.input`
   height: 35px;
   outline: none;
   margin: 30px 2px 10px 3px;
+  border-radius: 10px;
     
 `
 const ButtonPersonalizado = styled.button`
@@ -65,7 +66,9 @@ const ButtonPersonalizado = styled.button`
   box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.25);
   outline: none;
 `
-
+const MensagemTelaEu = styled.div`
+  background-color: #90EE90;
+`
   
 class App extends React.Component {
   state = {
@@ -73,12 +76,26 @@ class App extends React.Component {
     valorNomeUsuario:"",
     valorMensagem:""
   }
- 
+  reconheceEu = (valorNomeUsuario) => {
+    
+    if(valorNomeUsuario.toLowerCase === "Eu") {
+      let listaDeMensagensEu = this.state.mensagem.map((mensagem) => {
+        return (
+          <MensagemTelaEu>
+            <b>{mensagem.nomeUsuario}</b>:<br></br>
+            {mensagem.mensagemUsuario}
+          </MensagemTelaEu>
+        )
+      })
+    }
+  }
+
   adicionaMensagem = () =>{
     const novaMensagem = {
       nomeUsuario: this.state.valorNomeUsuario,
       mensagemUsuario: this.state.valorMensagem
-    };
+    } 
+    this.reconheceEu(this.state.valorNomeUsuario)
     const novasMensagens = [...this.state.mensagem, novaMensagem];
    
     this.setState({
@@ -91,20 +108,9 @@ class App extends React.Component {
   apertouEnter = (event) => {
     if (event.key === 'Enter'){
       this.adicionaMensagem()
-    }
-  }
-  // reconheceEu = (valorNomeUsuario) => {
-    
-  //   if(valorNomeUsuario === "Eu") {
-  //   const listaDeMensagens = this.state.mensagem.map((mensagem) => {
-  //     return (
-  //       <MensagemTela>
-  //         <NomeEu>{mensagem.nomeUsuario}</NomeEu>:<br></br>
-  //         {mensagem.mensagemUsuario}
-  //       </MensagemTela>
-  //   }
-  // }
-
+  } }
+  // buuuu
+  
   onChangeNomeUsuario = (event) => {
     this.setState({ valorNomeUsuario: event.target.value });
   };
@@ -114,14 +120,15 @@ class App extends React.Component {
   };
 
   render () {
-    const listaDeMensagens = this.state.mensagem.map((mensagem) => {
+    let listaDeMensagens = this.state.mensagem.map((mensagem) => {
       return (
         <MensagemTela>
           <b>{mensagem.nomeUsuario}</b>:<br></br>
           {mensagem.mensagemUsuario}
         </MensagemTela>
       );
-    });
+    }); // código que já estava funcionando
+    
 
     return (
       <TelaToda>        
